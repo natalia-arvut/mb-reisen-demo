@@ -50,7 +50,7 @@
   /* ---- Hero motion ---- */
   .kenburns { animation: kb 28s ease-in-out infinite alternate; transform-origin:72% 42%; will-change:transform; }
   @keyframes kb { from{ transform:scale(1.03);} to{ transform:scale(1.10);} }
-  @media (max-width:640px){ #top .kenburns { object-position:88% 44% !important; } }
+  @media (max-width:640px){ #top .hero-video, #top .hero-fallback { object-position:72% 50% !important; } }
   .shimmer { position:absolute; inset:-20% -10%; pointer-events:none; mix-blend-mode:screen;
     background:linear-gradient(105deg, transparent 38%, rgba(255,224,168,.10) 47%, rgba(255,243,214,.20) 50%, rgba(255,224,168,.10) 53%, transparent 62%);
     animation: shim 11s ease-in-out infinite; }
@@ -73,6 +73,8 @@
     .img-zoom img, .card-media img { transition:none; }
     .kenburns, .shimmer, .spark { animation:none !important; }
     .spark { opacity:.55; }
+    .hero-video { display:none !important; }
+    .hero-fallback { display:block !important; }
   }
   #nav.scrolled { background:rgba(20,48,42,.95); backdrop-filter:blur(10px); }
   .compass { width:1.55rem; height:1.55rem; flex:none; }
@@ -104,7 +106,10 @@
 <!-- ============ HERO ============ -->
 <section id="top" class="relative min-h-[100svh] flex items-center">
   <div class="absolute inset-0 overflow-hidden">
-    <img src="images/hero.jpg?v=4k" alt="Reisender auf einem Gipfel mit Blick über ein weites Bergpanorama im Morgenlicht" class="kenburns w-full h-full object-cover" style="object-position:60% 50%;">
+    <video class="hero-video w-full h-full object-cover" style="object-position:58% 52%;" autoplay muted loop playsinline preload="auto" poster="images/hero.jpg?v=5">
+      <source src="images/hero.mp4" type="video/mp4">
+    </video>
+    <img src="images/hero.jpg?v=5" alt="Reisender auf einem Gipfel über einem weiten Wolkenmeer im Morgenlicht" class="hero-fallback w-full h-full object-cover" style="object-position:58% 52%; display:none;">
     <div class="shimmer"></div>
     <div id="sparkles" class="absolute inset-0 pointer-events-none"></div>
     <div class="absolute inset-0" style="background:linear-gradient(90deg, rgba(16,40,35,.82) 0%, rgba(16,40,35,.55) 42%, rgba(16,40,35,.10) 72%, rgba(16,40,35,0) 100%);"></div>

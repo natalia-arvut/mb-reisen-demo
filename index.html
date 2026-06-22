@@ -48,15 +48,15 @@
   .js .reveal.in { opacity:1; transform:none; }
 
   /* ---- Hero motion ---- */
-  .kenburns { animation: kb 30s ease-in-out infinite alternate; transform-origin:62% 48%; will-change:transform; }
-  @keyframes kb { from{ transform:scale(1.06) translate(0,0);} to{ transform:scale(1.16) translate(-1.6%,-1.2%);} }
+  .kenburns { animation: kb 28s ease-in-out infinite alternate; transform-origin:72% 42%; will-change:transform; }
+  @keyframes kb { from{ transform:scale(1.03);} to{ transform:scale(1.10);} }
   .shimmer { position:absolute; inset:-20% -10%; pointer-events:none; mix-blend-mode:screen;
     background:linear-gradient(105deg, transparent 38%, rgba(255,224,168,.10) 47%, rgba(255,243,214,.20) 50%, rgba(255,224,168,.10) 53%, transparent 62%);
     animation: shim 11s ease-in-out infinite; }
   @keyframes shim { 0%{transform:translateX(-45%);} 50%{transform:translateX(45%);} 100%{transform:translateX(-45%);} }
-  .spark { position:absolute; width:3px; height:3px; border-radius:50%; background:#fff; opacity:0;
-    box-shadow:0 0 7px 1px rgba(255,238,200,.95); animation: tw 4.5s ease-in-out infinite; }
-  @keyframes tw { 0%,100%{opacity:0; transform:scale(.3);} 45%{opacity:.95; transform:scale(1);} 70%{opacity:.25;} }
+  .spark { position:absolute; width:4px; height:4px; border-radius:50%; background:#fff; opacity:0;
+    box-shadow:0 0 11px 2px rgba(255,240,205,1), 0 0 4px 1px #fff; animation: tw 3.2s ease-in-out infinite; }
+  @keyframes tw { 0%,100%{opacity:0; transform:scale(.25);} 40%{opacity:1; transform:scale(1.3);} 62%{opacity:.4; transform:scale(.85);} }
 
   /* ---- Service card crossfade + zoom ---- */
   .card-media { position:relative; overflow:hidden; }
@@ -103,7 +103,7 @@
 <!-- ============ HERO ============ -->
 <section id="top" class="relative min-h-[100svh] flex items-center">
   <div class="absolute inset-0 overflow-hidden">
-    <img src="images/hero.jpg" alt="Reisender auf einem Gipfel mit Blick über ein weites Bergpanorama im Morgenlicht" class="kenburns w-full h-full object-cover object-center">
+    <img src="images/hero.jpg" alt="Reisender auf einem Gipfel mit Blick über ein weites Bergpanorama im Morgenlicht" class="kenburns w-full h-full object-cover" style="object-position:66% 36%;">
     <div class="shimmer"></div>
     <div id="sparkles" class="absolute inset-0 pointer-events-none"></div>
     <div class="absolute inset-0" style="background:linear-gradient(90deg, rgba(16,40,35,.82) 0%, rgba(16,40,35,.55) 42%, rgba(16,40,35,.10) 72%, rgba(16,40,35,0) 100%);"></div>

@@ -46,10 +46,32 @@
   .img-zoom:hover img { transform:scale(1.06); }
   .js .reveal { opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
   .js .reveal.in { opacity:1; transform:none; }
+
+  /* ---- Hero motion ---- */
+  .kenburns { animation: kb 30s ease-in-out infinite alternate; transform-origin:62% 48%; will-change:transform; }
+  @keyframes kb { from{ transform:scale(1.06) translate(0,0);} to{ transform:scale(1.16) translate(-1.6%,-1.2%);} }
+  .shimmer { position:absolute; inset:-20% -10%; pointer-events:none; mix-blend-mode:screen;
+    background:linear-gradient(105deg, transparent 38%, rgba(255,224,168,.10) 47%, rgba(255,243,214,.20) 50%, rgba(255,224,168,.10) 53%, transparent 62%);
+    animation: shim 11s ease-in-out infinite; }
+  @keyframes shim { 0%{transform:translateX(-45%);} 50%{transform:translateX(45%);} 100%{transform:translateX(-45%);} }
+  .spark { position:absolute; width:3px; height:3px; border-radius:50%; background:#fff; opacity:0;
+    box-shadow:0 0 7px 1px rgba(255,238,200,.95); animation: tw 4.5s ease-in-out infinite; }
+  @keyframes tw { 0%,100%{opacity:0; transform:scale(.3);} 45%{opacity:.95; transform:scale(1);} 70%{opacity:.25;} }
+
+  /* ---- Service card crossfade + zoom ---- */
+  .card-media { position:relative; overflow:hidden; }
+  .card-media img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    transition: transform 1.3s cubic-bezier(.2,.7,.2,1), opacity 1s ease; }
+  .card-media .img-2 { opacity:0; }
+  .group:hover .card-media .img-1 { opacity:0; transform:scale(1.09); }
+  .group:hover .card-media .img-2 { opacity:1; transform:scale(1.09); }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior:auto; }
     .js .reveal { opacity:1; transform:none; transition:none; }
-    .img-zoom img { transition:none; }
+    .img-zoom img, .card-media img { transition:none; }
+    .kenburns, .shimmer, .spark { animation:none !important; }
+    .spark { opacity:.55; }
   }
   #nav.scrolled { background:rgba(20,48,42,.95); backdrop-filter:blur(10px); }
   .compass { width:1.55rem; height:1.55rem; flex:none; }
@@ -80,8 +102,10 @@
 
 <!-- ============ HERO ============ -->
 <section id="top" class="relative min-h-[100svh] flex items-center">
-  <div class="absolute inset-0">
-    <img src="images/hero.jpg" alt="Reisender auf einem Gipfel mit Blick über ein weites Bergpanorama im Morgenlicht" class="w-full h-full object-cover object-center">
+  <div class="absolute inset-0 overflow-hidden">
+    <img src="images/hero.jpg" alt="Reisender auf einem Gipfel mit Blick über ein weites Bergpanorama im Morgenlicht" class="kenburns w-full h-full object-cover object-center">
+    <div class="shimmer"></div>
+    <div id="sparkles" class="absolute inset-0 pointer-events-none"></div>
     <div class="absolute inset-0" style="background:linear-gradient(90deg, rgba(16,40,35,.82) 0%, rgba(16,40,35,.55) 42%, rgba(16,40,35,.10) 72%, rgba(16,40,35,0) 100%);"></div>
     <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(20,48,42,.30) 0%, rgba(20,48,42,0) 45%, rgba(20,48,42,.55) 100%);"></div>
   </div>
@@ -164,8 +188,9 @@
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-cream/15">
       <!-- 01 Individualreisen -->
       <div class="group relative bg-ink reveal">
-        <div class="img-zoom overflow-hidden">
-          <img src="images/individual.jpg" alt="Individualreise — privates Segelboot vor grünen Klippen" class="w-full h-80 object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+        <div class="card-media h-80">
+          <img src="images/individual.jpg" alt="Individualreise — privates Segelboot vor grünen Klippen" class="img-1">
+          <img src="images/individual2.jpg" alt="Individualreise — private Wasservilla über türkiser Lagune" class="img-2" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/30 to-transparent"></div>
         </div>
         <div class="absolute inset-0 p-7 flex flex-col justify-between">
@@ -178,8 +203,9 @@
       </div>
       <!-- 02 Kultur & Studien -->
       <div class="group relative bg-ink reveal">
-        <div class="img-zoom overflow-hidden">
-          <img src="images/kultur.jpg" alt="Kulturreise — historische Tempelarchitektur im Abendlicht" class="w-full h-80 object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+        <div class="card-media h-80">
+          <img src="images/kultur.jpg" alt="Kulturreise — Inseldorf am Mittelmeer im Abendlicht" class="img-1">
+          <img src="images/kultur2.jpg" alt="Studienreise — antiker griechischer Tempel im Sonnenuntergang" class="img-2" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/30 to-transparent"></div>
         </div>
         <div class="absolute inset-0 p-7 flex flex-col justify-between">
@@ -192,8 +218,9 @@
       </div>
       <!-- 03 Trekking & Abenteuer -->
       <div class="group relative bg-ink reveal">
-        <div class="img-zoom overflow-hidden">
-          <img src="images/trekking.jpg" alt="Trekking — Wanderer auf Bergpfad im Sonnenaufgang" class="w-full h-80 object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+        <div class="card-media h-80">
+          <img src="images/trekking.jpg" alt="Trekking — Wanderer auf Bergpfad im Sonnenaufgang" class="img-1">
+          <img src="images/trekking2.jpg" alt="Abenteuer — Hängebrücke über eine grüne Schlucht" class="img-2" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/30 to-transparent"></div>
         </div>
         <div class="absolute inset-0 p-7 flex flex-col justify-between">
@@ -206,8 +233,9 @@
       </div>
       <!-- 04 Pauschal & Flug -->
       <div class="group relative bg-ink reveal">
-        <div class="img-zoom overflow-hidden">
-          <img src="images/contact.jpg" alt="Pauschal- und Flugreisen — Küstenstädtchen am Meer in der Abenddämmerung" class="w-full h-80 object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+        <div class="card-media h-80">
+          <img src="images/contact.jpg" alt="Pauschalreise — Küstenstädtchen am Meer in der Abenddämmerung" class="img-1">
+          <img src="images/pauschal2.jpg" alt="Ferien — tropischer Palmenstrand mit türkisem Wasser" class="img-2" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/30 to-transparent"></div>
         </div>
         <div class="absolute inset-0 p-7 flex flex-col justify-between">
@@ -375,6 +403,23 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold:0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Hero — sanftes Funkeln über den Bergen
+  (function () {
+    const box = document.getElementById('sparkles');
+    if (!box) return;
+    const pts = [[12,22],[20,41],[28,15],[36,52],[44,27],[51,18],[59,45],[57,31],[66,23],[73,12],[80,35],[86,20],[40,11],[23,58]];
+    pts.forEach((p, i) => {
+      const s = document.createElement('span');
+      s.className = 'spark';
+      s.style.left = p[0] + '%';
+      s.style.top = p[1] + '%';
+      s.style.animationDelay = (i * 0.55 % 5).toFixed(2) + 's';
+      s.style.animationDuration = (3.6 + (i % 4) * 0.7).toFixed(1) + 's';
+      if (i % 3 === 0) { s.style.width = '2px'; s.style.height = '2px'; }
+      box.appendChild(s);
+    });
+  })();
 </script>
 
 </body>

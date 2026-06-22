@@ -50,6 +50,7 @@
   /* ---- Hero motion ---- */
   .kenburns { animation: kb 28s ease-in-out infinite alternate; transform-origin:72% 42%; will-change:transform; }
   @keyframes kb { from{ transform:scale(1.03);} to{ transform:scale(1.10);} }
+  @media (max-width:640px){ #top .kenburns { object-position:88% 44% !important; } }
   .shimmer { position:absolute; inset:-20% -10%; pointer-events:none; mix-blend-mode:screen;
     background:linear-gradient(105deg, transparent 38%, rgba(255,224,168,.10) 47%, rgba(255,243,214,.20) 50%, rgba(255,224,168,.10) 53%, transparent 62%);
     animation: shim 11s ease-in-out infinite; }
